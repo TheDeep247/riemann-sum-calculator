@@ -1,0 +1,9 @@
+-i
+ls
+cd..
+chdir
+ls
+help
+exit
+update
+exit

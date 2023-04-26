@@ -1,0 +1,86 @@
+{
+	"name": "ruby-language-server",
+	"displayName": "Ruby Language Server Client",
+	"description": "Language Server Client",
+	"license": "MIT",
+	"version": "0.1.2",
+	"publisher": "KurtWerle",
+	"engines": {
+		"vscode": "^1.41.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:ruby"
+	],
+	"main": "./out/src/extension",
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "#node ./node_modules/@types/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.1.6",
+		"@types/vscode": "^1.41.0",
+		"mocha": "^7.1.1",
+		"typescript": "^3.7.4"
+	},
+	"dependencies": {
+		"markdown-it": "^12.3.2",
+		"mz": "^2.7.0",
+		"vsce": "^1.22.0",
+		"vscode-languageclient": "^6.1.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kwerle/vscode_ruby_language_server.git"
+	},
+	"bugs": {
+		"url": "https://github.com/kwerle/vscode_ruby_language_server/issues"
+	},
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Ruby Language Server",
+			"properties": {
+				"ruby-language-server.additionalGems": {
+					"type": "string",
+					"scope": "user",
+					"default": "",
+					"description": "Comma separated list of additional gems to install - usually for rubocop.\nrubocop-rails,rubocop-performance..."
+				},
+				"ruby-language-server.logLevel": {
+					"type": "string",
+					"scope": "user",
+					"enum": [
+						"debug",
+						"info",
+						"warn",
+						"error"
+					],
+					"default": "error",
+					"description": "Generally only useful if you are debugging the server."
+				},
+				"ruby-language-server.dockerImage": {
+					"type": "string",
+					"scope": "user",
+					"default": "kwerle/ruby_language_server",
+					"description": "Name of the docker image to use for the server."
+				}
+			}
+		}
+	},
+	"__metadata": {
+		"id": "42a3f480-b0c2-454d-99c3-a01db01fcde7",
+		"publisherId": "1b37b766-3f01-4aff-854a-f25a95366985",
+		"publisherDisplayName": "Kurt Werle",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1682404042384,
+		"preRelease": false
+	}
+}

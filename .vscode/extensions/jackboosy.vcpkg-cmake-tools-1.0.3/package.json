@@ -1,0 +1,259 @@
+{
+	"name": "vcpkg-cmake-tools",
+	"displayName": "Vcpkg CMake Tools",
+	"description": "Vcpkg VSCode extension to integrate vcpkg into VSCode",
+	"icon": "images/vcpkg-logo.png",
+	"publisher": "JackBoosY",
+	"license": "MIT",
+	"version": "1.0.3",
+	"engines": {
+		"vscode": "^1.76.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"vcpkg"
+	],
+	"bugs": {
+		"url": "https://github.com/jackboosy/vcpkg-vscode-extension/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jackboosy/vcpkg-vscode-extension.git"
+	},
+	"homepage": "https://github.com/jackboosy/vcpkg-vscode-extension",
+	"activationEvents": [
+		"onLanguage:cmake",
+		"onLanguage:c",
+		"onLanguage:cpp",
+		"onLanguage:cuda-cpp",
+		"onLanguage:objective-c",
+		"onLanguage:objective-cpp",
+		"workspaceContains:vcpkg.json",
+		"workspaceContains:CMakeLists.txt"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "vcpkg-welcome.getting_start",
+				"title": "Vcpkg getting start",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.enable_vcpkg",
+				"title": "Enable vcpkg",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.disable_vcpkg",
+				"title": "Disable vcpkg",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.current_triplet",
+				"title": "Get current triplet",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.current_host_triplet",
+				"title": "Get current host triplet",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.enable_manifest",
+				"title": "Enable manifest",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.disable_manifest",
+				"title": "Disable manifest",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.use_static_lib",
+				"title": "Use static library",
+				"category": "vcpkg"
+			},
+			{
+				"command": "vcpkg-integration.use_dynamic_lib",
+				"title": "Use dynamic library",
+				"category": "vcpkg"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Vcpkg",
+			"properties": {
+				"vcpkg.general.vcpkgPath": {
+					"type": "string",
+					"default": "",
+					"description": "vcpkg path which you installed.",
+					"scope": "window"
+				},
+				"vcpkg.general.enable": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use vcpkg",
+					"scope": "resource"
+				},
+				"vcpkg.target.useManifest": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use Vcpkg Manifest",
+					"scope": "resource"
+				},
+				"vcpkg.target.installDependencies": {
+					"type": "boolean",
+					"default": true,
+					"description": "Install Vcpkg Dependencies",
+					"scope": "resource"
+				},
+				"vcpkg.target.useStaticLib": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use Static Library",
+					"scope": "resource"
+				},
+				"vcpkg.target.useDynamicCRT": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use Dynamic CRT",
+					"scope": "resource"
+				},
+				"vcpkg.target.defaultTriplet": {
+					"type": "string",
+					"default": "",
+					"description": "Default triplet",
+					"scope": "resource"
+				},
+				"vcpkg.target.hostTriplet": {
+					"type": "string",
+					"default": "",
+					"description": "Host triplet",
+					"scope": "resource"
+				},
+				"vcpkg.target.preferSystemLibs": {
+					"type": "boolean",
+					"default": false,
+					"description": "Find system libraries first",
+					"scope": "resource"
+				},
+				"vcpkg.target.additionalOptions": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"title": "Vcpkg install options"
+					},
+					"default": [],
+					"description": "Additional vcpkg options",
+					"scope": "resource"
+				}
+			}
+		},
+		"walkthroughs": [
+			{
+				"id": "start",
+				"title": "Getting start with vcpkg",
+				"description": "Your first steps to setup vcpkg in your custom project.",
+				"steps": [
+					{
+						"id": "enable_vcpkg",
+						"title": "Enable vcpkg",
+						"description": "This step will try to enable vcpkg.\n[Enable vcpkg](command:vcpkg-integration.enable_vcpkg)",
+						"media": {
+							"image": "media/enable_vcpkg.png",
+							"altText": "You may need to select vcpkg root folder."
+						},
+						"completionEvents": [
+							"onCommand:vcpkg-integration.enable_vcpkg"
+						]
+					},
+					{
+						"id": "check_host_triplet",
+						"title": "Check your host triplet",
+						"description": "This step will try to ensure your host triplet.\n[Check triplet](command:vcpkg-integration.current_host_triplet)",
+						"media": {
+							"image": "media/check_host_triplet.png",
+							"altText": "The host triplet will show on VSCode notification window."
+						},
+						"completionEvents": [
+							"onCommand:vcpkg-integration.current_host_triplet"
+						]
+					},
+					{
+						"id": "check_target_triplet",
+						"title": "Check your target triplet",
+						"description": "This step will try to ensure your target triplet.\n[Check triplet](command:vcpkg-integration.current_triplet)",
+						"media": {
+							"image": "media/check_target_triplet.png",
+							"altText": "The target triplet will show on VSCode notification window."
+						},
+						"completionEvents": [
+							"onCommand:vcpkg-integration.current_triplet"
+						]
+					},
+					{
+						"id": "enable_manifest",
+						"title": "Enable vcpkg manifest mode in your project",
+						"description": "This step will try to enable vcpkg manifest mode if vcpkg.json is found.\n[Enable manifest](command:vcpkg-integration.enable_manifest)",
+						"media": {
+							"image": "media/enable_manifest.png",
+							"altText": "Manifest mode will only be enabled when your project root has vcpkg.json file(manifest file)."
+						},
+						"completionEvents": [
+							"onCommand:vcpkg-integration.enable_manifest"
+						]
+					},
+					{
+						"id": "use_static_lib",
+						"title": "Use vcpkg installed static libraries",
+						"description": "This step will set your project to use vcpkg installed static libraries.\n[Use static libraries](command:vcpkg-integration.use_static_lib)",
+						"media": {
+							"image": "media/use_static_libs.png",
+							"altText": "Use vcpkg installed libraries which belong to static triplet."
+						},
+						"completionEvents": [
+							"onCommand:vcpkg-integration.use_static_lib"
+						]
+					}
+				]
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"extensionDependencies": [
+		"ms-vscode.cmake-tools"
+	],
+	"devDependencies": {
+		"@types/vscode": "^1.76.0",
+		"@types/glob": "^8.1.0",
+		"@types/mocha": "^10.0.1",
+		"@types/node": "16.x",
+		"@typescript-eslint/eslint-plugin": "^5.56.0",
+		"@typescript-eslint/parser": "^5.56.0",
+		"eslint": "^8.36.0",
+		"glob": "^8.1.0",
+		"mocha": "^10.2.0",
+		"typescript": "^4.9.5",
+		"@vscode/test-electron": "^2.3.0"
+	},
+	"__metadata": {
+		"id": "05b85465-0b12-43b7-9b10-c1ee10b4130a",
+		"publisherId": "bf99c954-7591-46da-ab2c-a0c8487b7eb2",
+		"publisherDisplayName": "JackBoosY",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1681965985561,
+		"preRelease": false
+	}
+}
